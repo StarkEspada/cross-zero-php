@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8"><!-- Используенться если едит кодировка -->
+</head>
+<body>
+
+<style>
+.bob{
+	width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 39px;
+    text-align: center;
+}
+.container{
+	width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 110px;
+}
+.playerOne{
+	width: 100px;
+    height: 100px;
+}
+
+.blockOne, .blockTwo, .blockTree, .blockFor, .blockFive, .blockSix, .blockSeven, .blockEight, .blockNine {
+	width: 50px;
+    height: 50px;
+    font-size: 60px;
+    text-align: center;
+}
+.send{
+
+}
+.refresh{
+	
+}
+</style>
+
+<input class="blockOne" >
+<input class="blockTwo">
+<input class="blockTree">
+<br>
+<input class="blockFor">
+<input class="blockFive">
+<input class="blockSix">
+<br>
+<input class="blockSeven">
+<input class="blockEight">
+<input class="blockNine">
+<input type="submit" class="send">
+<input type="submit" class="refresh" value="Обновить">
+<br><br>
+<div class="container">
+	<div class="playerOne"></div>
+</div>
+
+
+
+<script src="jquery-3.4.1.js"></script>
+
+<script>
+	
+	var blockOne = $(".blockOne");
+	var blockTwo = $(".blockTwo");
+	var blockTree = $(".blockTree");
+	var blockFor = $(".blockFor");
+	var blockFive = $(".blockFive");
+	var blockSix = $(".blockSix");
+	var blockSeven = $(".blockSeven");
+	var blockEight = $(".blockEight");
+	var blockNine = $(".blockNine");
+	var playerOne = $(".playerOne");
+	var refresh = $(".refresh");
+	var send = $(".send");
+
+
+refresh.on("click", function(){
+	$.ajax({
+		url: "server.php",
+		type: "GET",
+		data: {},
+
+success:function(data){
+	playerOne.html(data)
+}		
+	})
+})
+
+
+
+send.on("click", function(){
+	
+	$.ajax({
+		url: "server.php",
+		type: "GET",
+		data: {
+			"blockOne": blockOne.val(),
+			"blockTwo": blockTwo.val(),
+			"blockTree": blockTree.val(),
+			"blockFor": blockFor.val(),
+			"blockFive": blockFive.val(),
+			"blockSix": blockSix.val(),
+			"blockSeven": blockSeven.val(),
+			"blockEight": blockEight.val(),
+			"blockNine": blockNine.val(),
+		},
+		
+		success:function(data){
+		
+		playerOne.html(data);
+		}
+	})
+})
+
+
+</script>
+
+</body>
+</html>
